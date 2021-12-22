@@ -30,7 +30,7 @@ import com.google.android.gms.tasks.Task;
 public class MainActivity extends AppCompatActivity {
 
     Button btLocation;
-    TextView tvLatitude, tvLongitude;
+    TextView latitude, longitude;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btLocation = findViewById(R.id.bt_location);
-        tvLatitude = findViewById(R.id.tv_latitude);
-        tvLongitude = findViewById(R.id.tv_longitude);
+        btLocation = findViewById(R.id.btn_location);
+        latitude = findViewById(R.id.tv_latitude);
+        longitude = findViewById(R.id.tv_longitude);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
                 MainActivity.this
@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                     Location location = task.getResult();
 
                     if(location != null){
-                        tvLatitude.setText(String.valueOf(location.getLatitude()));
-                        tvLongitude.setText(String.valueOf(location.getLongitude()));
+                        latitude.setText(String.valueOf(location.getLatitude()));
+                        longitude.setText(String.valueOf(location.getLongitude()));
 
                     }else{
                         LocationRequest locationRequest = new LocationRequest()
@@ -97,11 +97,8 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onLocationResult(LocationResult locationResult) {
                                 Location location1 = locationResult.getLastLocation();
-                                //set latitude
-                                tvLatitude.setText(String.valueOf(location1.getLongitude()));
-
-                                //set longitude
-                                tvLongitude.setText(String.valueOf(location1.getLongitude()));
+                                latitude.setText(String.valueOf(location1.getLongitude()));
+                                longitude.setText(String.valueOf(location1.getLongitude()));
                             }
                         };
 
